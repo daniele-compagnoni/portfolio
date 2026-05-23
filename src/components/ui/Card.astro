@@ -1,0 +1,24 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+  target?: string;
+}
+
+const { href, class: className = '', target } = Astro.props;
+
+const baseClass = "block group relative bg-bg-elevated border border-border-subtle rounded-[6px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:border-action-primary/50 hover:shadow-xl hover:shadow-[var(--color-action-primary)]/10 dark:hover:shadow-none overflow-hidden active:scale-[0.98]";
+const combinedClass = `${baseClass} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} target={target} class={combinedClass}>
+      <slot />
+    </a>
+  ) : (
+    <div class={combinedClass}>
+      <slot />
+    </div>
+  )
+}

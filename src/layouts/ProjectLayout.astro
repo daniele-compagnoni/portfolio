@@ -1,0 +1,28 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={`${frontmatter.title} | Project`} description={frontmatter.summary}>
+  <article class="max-w-[75ch] mx-auto">
+    <header class="mb-12">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-xs font-mono px-2 py-1 bg-bg-muted border border-border-subtle rounded-md text-text-secondary">{frontmatter.context}</span>
+        <time class="text-sm font-mono text-text-muted">{new Date(frontmatter.date).toLocaleDateString()}</time>
+      </div>
+      <h1 class="text-4xl font-semibold tracking-tight text-text-primary mb-4">{frontmatter.title}</h1>
+      <p class="text-lg text-text-secondary font-serif leading-relaxed mb-6">{frontmatter.summary}</p>
+      {frontmatter.links && (
+        <div class="flex gap-4">
+          {frontmatter.links.repository && <a href={frontmatter.links.repository} target="_blank" class="text-sm text-action-primary hover:underline font-mono">Repository</a>}
+          {frontmatter.links.liveDemo && <a href={frontmatter.links.liveDemo} target="_blank" class="text-sm text-action-primary hover:underline font-mono">Live Demo</a>}
+        </div>
+      )}
+    </header>
+    
+    <div class="prose prose-zinc dark:prose-invert max-w-none prose-p:font-serif prose-p:leading-relaxed prose-headings:font-sans">
+      <slot />
+    </div>
+  </article>
+</Layout>

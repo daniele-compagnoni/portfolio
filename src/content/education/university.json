@@ -1,0 +1,15 @@
+{
+  "institution": "University of Technology",
+  "degree": "B.Sc. Computer Science",
+  "startDate": "2020-09-01",
+  "endDate": "2024-06-01",
+  "gpa": "3.9/4.0",
+  "coreCoursework": [
+    "Data Structures",
+    "Dynamical Systems",
+    "Theoretical Computer Science"
+  ],
+  "milestones": [
+    "Custom thesis work on optimization algorithms"
+  ]
+}

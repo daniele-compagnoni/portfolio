@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const featuredProjects = projects.filter(p => p.data.featured).slice(0, 3);
+
+const thoughts = await getCollection('thoughts');
+const recentThoughts = thoughts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()).slice(0, 2);
+
+const skills = await getCollection('skills');
+const coreSkills = skills.slice(0, 15);
+---
+
+<Layout title="Daniele Compagnoni | Software Engineer">
+  <!-- Hero Section -->
+  <section class="py-24 md:py-32 flex flex-col gap-8 max-w-[85ch]">
+    <h1 class="text-5xl md:text-7xl font-semibold tracking-tight text-text-primary leading-[1.1]">
+      Daniele Compagnoni. <br/>
+      <span class="text-text-muted">Software Engineer.</span>
+    </h1>
+    <p class="text-xl md:text-2xl font-serif text-text-secondary leading-relaxed">
+      Architecting high-performance, decoupled systems and elegant, data-dense interfaces without the bloat. Emphasizing fundamentals over framework reliance.
+    </p>
+    <div class="flex flex-wrap gap-4 mt-6">
+      <Button href="/projects">View Work</Button>
+      <Button href="/CV.pdf" variant="secondary" target="_blank">Download CV</Button>
+    </div>
+  </section>
+
+  <!-- Skill Cloud -->
+  <section class="py-16 border-t border-border-subtle">
+    <h2 class="text-xs font-bold text-text-muted uppercase tracking-wider mb-6">Core Competencies</h2>
+    <div class="flex flex-wrap gap-3">
+      {coreSkills.map(skill => (
+        <a href="/skills" class="inline-flex items-center rounded-md border border-border-subtle bg-bg-muted px-3 py-1.5 text-sm font-mono font-medium text-text-primary transition-colors hover:border-action-primary hover:text-action-primary cursor-pointer duration-150">
+          {skill.data.name}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="py-16 border-t border-border-subtle">
+    <div class="flex justify-between items-end mb-8">
+      <h2 class="text-3xl font-semibold tracking-tight text-text-primary">Featured Work</h2>
+      <a href="/projects" class="text-sm font-mono font-medium text-action-primary hover:underline transition-colors duration-150">View all projects &rarr;</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {featuredProjects.map(project => (
+        <Card href={`/projects/${project.id}`} class="p-6 flex flex-col h-full min-h-[220px]">
+          <h3 class="text-xl font-semibold text-text-primary mb-2 transition-colors duration-150 group-hover:text-action-primary">{project.data.title}</h3>
+          <p class="text-sm text-text-secondary font-serif leading-relaxed mb-6 flex-grow">{project.data.summary}</p>
+          <div class="flex flex-wrap gap-2 mt-auto">
+             {project.data.skills.slice(0, 3).map(skill => (
+               <span class="inline-flex items-center rounded-md border border-action-primary/20 bg-action-primary/5 px-2 py-0.5 text-[10px] font-mono font-medium text-text-primary">
+                 {skill.id}
+               </span>
+             ))}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+
+  <!-- Recent Thoughts -->
+  <section class="py-16 border-t border-border-subtle">
+    <div class="flex justify-between items-end mb-8">
+      <h2 class="text-3xl font-semibold tracking-tight text-text-primary">Recent Thoughts</h2>
+      <a href="/thoughts" class="text-sm font-mono font-medium text-action-primary hover:underline transition-colors duration-150">Read journal &rarr;</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {recentThoughts.map(thought => (
+        <Card href={`/thoughts/${thought.id}`} class="p-6">
+          <time class="text-xs font-mono text-text-muted mb-3 block">{new Date(thought.data.publishDate).toLocaleDateString()}</time>
+          <h3 class="text-xl font-semibold text-text-primary mb-3 transition-colors duration-150 group-hover:text-action-primary">{thought.data.title}</h3>
+          <div class="flex gap-2">
+            {thought.data.tags.slice(0, 2).map(tag => (
+               <span class="text-xs font-mono text-text-secondary before:content-['#'] before:text-text-muted">{tag}</span>
+            ))}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+</Layout>

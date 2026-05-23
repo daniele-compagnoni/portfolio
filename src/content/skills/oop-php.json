@@ -1,0 +1,6 @@
+{
+  "name": "Pure PHP (OOP)",
+  "category": "Backend & Architecture",
+  "description": "Architecting decoupled backend systems using vanilla PHP, implementing structural patterns like Singleton and MVC without framework reliance.",
+  "iconString": "php"
+}

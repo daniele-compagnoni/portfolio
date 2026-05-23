@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/ui/Card.astro';
+import { getCollection } from 'astro:content';
+
+const education = await getCollection('education');
+// Sort education by end date descending
+education.sort((a, b) => b.data.endDate.valueOf() - a.data.endDate.valueOf());
+---
+
+<Layout title="About | Daniele Compagnoni" description="Narrative bio and educational trajectory of Daniele Compagnoni.">
+  <div class="max-w-[85ch] mx-auto py-12">
+    <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-text-primary mb-12">About</h1>
+    
+    <!-- Narrative Bio -->
+    <section class="prose prose-zinc dark:prose-invert max-w-none prose-p:font-serif prose-p:leading-relaxed prose-headings:font-sans mb-20">
+      <p>
+        I am a software engineer driven by a philosophy of efficiency, robust fundamentals, and architectural clarity. I believe that modern development too often relies on bloated frameworks to solve problems that are better addressed through a deep understanding of computer science principles and system design.
+      </p>
+      <p>
+        My core objective is to build systems that scale gracefully, remain highly maintainable, and execute with speed. By prioritizing cross-disciplinary insights—from finance to dynamical systems—I bring a pragmatic and mathematically rigorous approach to software architecture.
+      </p>
+      <p>
+        Currently, I am exploring low-level systems, data structures, and the intersection of tech and market relations.
+      </p>
+    </section>
+
+    <!-- Education Timeline -->
+    <section>
+      <h2 class="text-2xl font-semibold tracking-tight text-text-primary mb-8 border-b border-border-subtle pb-4">Academic Trajectory</h2>
+      <div class="flex flex-col gap-6">
+        {education.map(edu => (
+          <Card class="p-6 md:p-8">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+              <div>
+                <h3 class="text-xl font-semibold text-text-primary mb-1">{edu.data.degree}</h3>
+                <span class="text-sm font-mono text-text-secondary">{edu.data.institution}</span>
+              </div>
+              <div class="flex flex-col md:items-end gap-1">
+                <time class="text-xs font-mono text-text-muted bg-bg-muted border border-border-subtle px-2 py-1 rounded-md">
+                  {new Date(edu.data.startDate).getFullYear()} — {new Date(edu.data.endDate).getFullYear()}
+                </time>
+                {edu.data.gpa && <span class="text-xs font-mono text-text-muted mt-1">GPA: {edu.data.gpa}</span>}
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <h4 class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Core Coursework</h4>
+              <div class="flex flex-wrap gap-2">
+                {edu.data.coreCoursework.map(course => (
+                  <span class="inline-flex items-center rounded-md border border-border-subtle bg-bg-muted px-2.5 py-0.5 text-xs font-mono text-text-secondary">
+                    {course}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {edu.data.milestones && edu.data.milestones.length > 0 && (
+              <div>
+                <h4 class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Milestones</h4>
+                <ul class="list-disc list-inside text-sm font-serif text-text-secondary space-y-1">
+                  {edu.data.milestones.map(milestone => (
+                    <li>{milestone}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </Card>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,36 @@
+---
+import ThemeToggle from '../vue/ThemeToggle.vue';
+
+const links = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Experience', href: '/experience' },
+  { label: 'Skills', href: '/skills' },
+  { label: 'Thoughts', href: '/thoughts' },
+];
+---
+
+<header class="fixed top-0 w-full z-50 liquid-glass">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="/" class="font-sans font-semibold text-lg tracking-tight">DC.</a>
+    
+    <nav class="hidden md:flex gap-6">
+      {links.map(link => (
+        <a href={link.href} class="text-sm font-medium text-text-secondary hover:text-action-primary transition-colors">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    
+    <div class="flex items-center gap-4">
+      <ThemeToggle client:load />
+      <a href="/contact" class="hidden md:inline-flex text-sm font-medium border border-border-subtle hover:border-border-strong hover:bg-bg-muted px-4 py-2 rounded-md transition-all">
+        Contact
+      </a>
+      <a href="/CV.pdf" target="_blank" class="text-sm font-medium bg-action-primary hover:bg-action-hover text-action-fg px-4 py-2 rounded-md transition-colors shadow-sm">
+        Download CV
+      </a>
+    </div>
+  </div>
+</header>

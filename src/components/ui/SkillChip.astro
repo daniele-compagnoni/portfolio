@@ -1,0 +1,23 @@
+---
+interface Props {
+  name: string;
+  href?: string;
+}
+
+const { name, href } = Astro.props;
+
+// Using tailwind v4 arbitary values for CSS vars with opacity support
+const chipClass = "inline-flex items-center rounded-md border border-[var(--color-action-primary)]/20 bg-[var(--color-action-primary)]/5 px-2.5 py-0.5 text-xs font-mono font-medium text-text-primary transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[var(--color-action-primary)]/40 hover:bg-[var(--color-action-primary)]/10 cursor-pointer active:scale-95 hover:shadow-sm";
+---
+
+{
+  href ? (
+    <a href={href} class={chipClass}>
+      {name}
+    </a>
+  ) : (
+    <span class={chipClass}>
+      {name}
+    </span>
+  )
+}

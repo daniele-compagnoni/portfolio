@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SkillDetail from '../components/vue/SkillDetail.vue';
+import { getCollection } from 'astro:content';
+
+const skills = await getCollection('skills');
+const projects = await getCollection('projects');
+const experiences = await getCollection('experience');
+---
+
+<Layout title="Skills Taxonomy | Daniele Compagnoni" description="Interactive bipartite graph projection connecting capabilities to hard evidence.">
+  <div class="max-w-[1200px] mx-auto py-12">
+    <div class="max-w-[85ch] mb-12">
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-text-primary mb-6">Skill Taxonomy</h1>
+      <p class="text-lg text-text-secondary font-serif leading-relaxed">
+        This functions as an interactive projection connecting capabilities to hard evidence. Select a skill to view the specific projects and roles where it was utilized.
+      </p>
+    </div>
+
+    <SkillDetail client:load skills={skills} projects={projects} experiences={experiences} />
+  </div>
+</Layout>

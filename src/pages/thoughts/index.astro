@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/ui/Card.astro';
+import { getCollection } from 'astro:content';
+
+const thoughts = await getCollection('thoughts');
+thoughts.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+
+<Layout title="Thoughts | Daniele Compagnoni" description="Professional journal on technical writings, analyses, and market-technology thoughts.">
+  <div class="max-w-[85ch] mx-auto py-12">
+    <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-text-primary mb-6">Thoughts</h1>
+    <p class="text-lg text-text-secondary font-serif leading-relaxed mb-12">
+      A chronological feed of my technical writings, analyses, and thoughts on the intersection of engineering and markets.
+    </p>
+
+    <div class="flex flex-col gap-6">
+      {thoughts.map(thought => (
+        <Card href={`/thoughts/${thought.id}`} class="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="flex-grow">
+            <h2 class="text-2xl font-semibold text-text-primary mb-2 group-hover:text-action-primary transition-colors">{thought.data.title}</h2>
+            {thought.data.seoDescription && (
+              <p class="text-text-secondary font-serif mb-4 line-clamp-2">{thought.data.seoDescription}</p>
+            )}
+            <div class="flex flex-wrap gap-2">
+              {thought.data.tags.map(tag => (
+                <span class="text-xs font-mono text-text-secondary before:content-['#'] before:text-text-muted">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div class="md:w-32 flex-shrink-0 text-left md:text-right">
+            <time class="text-sm font-mono text-text-muted">{new Date(thought.data.publishDate).toLocaleDateString()}</time>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </div>
+</Layout>

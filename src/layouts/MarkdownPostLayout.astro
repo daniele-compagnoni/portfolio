@@ -1,0 +1,17 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.seoTitle || frontmatter.title} description={frontmatter.seoDescription}>
+  <article class="prose prose-zinc dark:prose-invert max-w-[75ch] mx-auto prose-p:leading-relaxed prose-p:font-serif prose-headings:font-sans">
+    <header class="mb-12 not-prose">
+      <h1 class="text-4xl font-semibold tracking-tight text-text-primary mb-4">{frontmatter.title}</h1>
+      <div class="flex gap-4 text-sm text-text-secondary font-mono">
+        <time datetime={frontmatter.publishDate}>{new Date(frontmatter.publishDate).toLocaleDateString()}</time>
+      </div>
+    </header>
+    <slot />
+  </article>
+</Layout>
