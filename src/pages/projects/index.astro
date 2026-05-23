@@ -1,6 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import ProjectFilter from '../../components/vue/ProjectFilter.vue';
+import Layout from '@/layouts/Layout.astro';
+import ProjectFilter from '@/components/vue/ProjectFilter.vue';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');

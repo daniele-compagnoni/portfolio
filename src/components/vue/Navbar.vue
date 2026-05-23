@@ -62,8 +62,8 @@
 <script setup>
 import { ref } from 'vue';
 import { Menu, X } from 'lucide-vue-next';
-import ThemeToggle from './ThemeToggle.vue';
-import LionIcon from './LionIcon.vue';
+import ThemeToggle from '@/components/vue/ThemeToggle.vue';
+import LionIcon from '@/components/vue/LionIcon.vue';
 
 const isMenuOpen = ref(false);
 

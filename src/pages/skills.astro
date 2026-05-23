@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SkillDetail from '../components/vue/SkillDetail.vue';
+import Layout from '@/layouts/Layout.astro';
+import SkillDetail from '@/components/vue/SkillDetail.vue';
 import { getCollection } from 'astro:content';
 
 const skills = await getCollection('skills');
