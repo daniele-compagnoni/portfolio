@@ -61,7 +61,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Menu, X } from 'lucide-vue-next';
+import { Menu, X } from '@lucide/vue';
 import ThemeToggle from '@/components/vue/ThemeToggle.vue';
 import LionIcon from '@/components/vue/LionIcon.vue';
 

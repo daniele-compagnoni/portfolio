@@ -1,14 +1,17 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
-import vue from '@astrojs/vue';
+import tailwindcss from "@tailwindcss/vite";
+import vue from "@astrojs/vue";
 
 // https://astro.build/config
 export default defineConfig({
+  // 1. Explicitly enforce pure Static Site Generation (SSG)
+  output: "static",
+
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
 
-  integrations: [vue()]
+  integrations: [vue()],
 });

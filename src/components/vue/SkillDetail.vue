@@ -63,7 +63,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { X } from 'lucide-vue-next';
+import { X } from '@lucide/vue';
 
 const props = defineProps({
   skills: { type: Array, required: true },
