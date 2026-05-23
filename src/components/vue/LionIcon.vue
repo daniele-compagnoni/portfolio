@@ -1,0 +1,3 @@
+<template>
+  <img src="/logo.png" alt="DC Logo" class="w-full h-full object-contain scale-[1.3]" />
+</template>

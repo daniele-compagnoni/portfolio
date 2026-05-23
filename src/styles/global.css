@@ -16,6 +16,8 @@
 
 @layer base {
   :root {
+    color-scheme: light;
+
     --color-bg-base: #FFFFFF;
     --color-bg-muted: #FAFAFA;
     --color-bg-elevated: #FFFFFF;
@@ -33,20 +35,39 @@
   }
 
   .dark {
-    --color-bg-base: #09090B;
-    --color-bg-muted: #18181B;
-    --color-bg-elevated: #27272A;
+    color-scheme: dark;
+
+    --color-bg-base: #0d1117;
+    --color-bg-muted: #161b22;
+    --color-bg-elevated: #21262d;
     
-    --color-text-primary: #FFFFFF;
-    --color-text-secondary: #A1A1AA;
-    --color-text-muted: #52525B;
+    --color-text-primary: #e6edf3;
+    --color-text-secondary: #8b949e;
+    --color-text-muted: #6e7681;
     
-    --color-border-subtle: #27272A;
-    --color-border-strong: #52525B;
+    --color-border-subtle: #30363d;
+    --color-border-strong: #484f58;
     
-    --color-action-primary: var(--color-azure-dark);
-    --color-action-hover: var(--color-azure-dark-hover);
-    --color-action-fg: #09090B;
+    --color-action-primary: #2f81f7;
+    --color-action-hover: #58a6ff;
+    --color-action-fg: #0d1117;
+
+    /* Typography Overrides */
+    --tw-prose-body: var(--color-text-secondary);
+    --tw-prose-headings: var(--color-text-primary);
+    --tw-prose-links: var(--color-action-primary);
+    --tw-prose-bold: var(--color-text-primary);
+    --tw-prose-counters: var(--color-text-muted);
+    --tw-prose-bullets: var(--color-border-strong);
+    --tw-prose-hr: var(--color-border-subtle);
+    --tw-prose-quotes: var(--color-text-secondary);
+    --tw-prose-quote-borders: var(--color-border-strong);
+    --tw-prose-captions: var(--color-text-muted);
+    --tw-prose-code: var(--color-text-primary);
+    --tw-prose-pre-code: var(--color-text-primary);
+    --tw-prose-pre-bg: var(--color-bg-elevated);
+    --tw-prose-th-borders: var(--color-border-strong);
+    --tw-prose-td-borders: var(--color-border-subtle);
   }
 }
 
@@ -55,7 +76,32 @@
     background-color: var(--color-bg-base);
     color: var(--color-text-primary);
   }
+
+  ::selection {
+    background-color: rgba(47, 129, 247, 0.25);
+    color: inherit;
+  }
+
+  /* Neutralise browser autofill colour injection so dark inputs stay dark */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-text-primary);
+    box-shadow: 0 0 0 1000px var(--color-bg-elevated) inset;
+    transition: background-color 5000s ease-in-out 0s;
+    border-color: var(--color-border-subtle);
+  }
 }
+
+/* Tailwind v4 typography: ensure bold text in dark mode uses the correct
+   light colour regardless of how prose-invert resolves --tw-prose-bold */
+.dark .prose strong {
+  color: var(--color-text-primary);
+}
+
 
 @utility liquid-glass {
   background-color: rgba(255, 255, 255, 0.75);
@@ -64,7 +110,7 @@
 }
 
 .dark .liquid-glass {
-  background-color: rgba(9, 9, 11, 0.65);
+  background-color: rgba(13, 17, 23, 0.65);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
 }

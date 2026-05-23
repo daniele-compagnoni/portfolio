@@ -8,7 +8,7 @@ interface Props {
 
 const { variant = 'primary', href, class: className = '', target } = Astro.props;
 
-const baseClass = "inline-flex items-center justify-center rounded-[6px] px-4 py-2 text-sm font-medium transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action-primary focus-visible:ring-offset-2 active:scale-95";
+const baseClass = "inline-flex items-center justify-center rounded-[6px] px-4 py-2 text-sm font-medium transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base active:scale-95";
 const primaryClass = "bg-action-primary text-action-fg hover:bg-action-hover hover:shadow-md hover:shadow-action-primary/20";
 const secondaryClass = "border border-border-subtle bg-transparent text-text-primary hover:bg-bg-muted";
 

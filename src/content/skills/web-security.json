@@ -1,0 +1,5 @@
+{
+  "name": "Web Application Security",
+  "category": "Backend & Architecture",
+  "description": "Implementing strict RBAC models, payload validation, and mitigating common web vulnerabilities."
+}

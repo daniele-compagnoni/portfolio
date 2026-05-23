@@ -1,0 +1,20 @@
+{
+  "institution": "Sapienza University of Rome",
+  "degree": "B.Eng. in Computer and Control Engineering",
+  "startDate": "2023-09-01",
+  "endDate": "2026-09-01",
+  "gpa": "On track",
+  "coreCoursework": [
+    "Software Design (30/30 Cum Laude)",
+    "Algorithms & Data Structures",
+    "Operating Systems & Networks",
+    "Theoretical Computer Science",
+    "Computer Systems Architecture",
+    "Probability & Statistics",
+    "Mathematical Programming",
+    "Dynamic & Control Systems"
+  ],
+  "milestones": [
+    "Bridged theoretical CS with applied AI engineering."
+  ]
+}

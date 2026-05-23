@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import profileImage from '../assets/profile.png';
 
 const projects = await getCollection('projects');
 const featuredProjects = projects.filter(p => p.data.featured).slice(0, 3);
@@ -16,17 +18,27 @@ const coreSkills = skills.slice(0, 15);
 
 <Layout title="Daniele Compagnoni | Software Engineer">
   <!-- Hero Section -->
-  <section class="py-24 md:py-32 flex flex-col gap-8 max-w-[85ch]">
-    <h1 class="text-5xl md:text-7xl font-semibold tracking-tight text-text-primary leading-[1.1]">
-      Daniele Compagnoni. <br/>
-      <span class="text-text-muted">Software Engineer.</span>
-    </h1>
-    <p class="text-xl md:text-2xl font-serif text-text-secondary leading-relaxed">
-      Architecting high-performance, decoupled systems and elegant, data-dense interfaces without the bloat. Emphasizing fundamentals over framework reliance.
-    </p>
-    <div class="flex flex-wrap gap-4 mt-6">
-      <Button href="/projects">View Work</Button>
-      <Button href="/CV.pdf" variant="secondary" target="_blank">Download CV</Button>
+  <section class="py-24 md:py-32 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-center">
+    <div class="flex flex-col gap-8 max-w-[85ch]">
+      <h1 class="text-5xl md:text-7xl font-semibold tracking-tight text-text-primary leading-[1.1]">
+        Daniele Compagnoni. <br/>
+        <span class="text-text-muted">Software Engineer.</span>
+      </h1>
+      <p class="text-xl md:text-2xl font-serif text-text-secondary leading-relaxed">
+        Architecting high-performance, decoupled systems and elegant, data-dense interfaces without the bloat. Emphasizing fundamentals over framework reliance.
+      </p>
+      <div class="flex flex-wrap gap-4 mt-6">
+        <Button href="/projects">View Work</Button>
+        <Button href="/CV.pdf" variant="secondary" target="_blank">Download CV</Button>
+      </div>
+    </div>
+    
+    <div class="hidden md:flex justify-end">
+      <Image 
+        src={profileImage} 
+        alt="Daniele Compagnoni" 
+        class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full border-2 border-border-subtle shadow-xl bg-bg-muted" 
+      />
     </div>
   </section>
 

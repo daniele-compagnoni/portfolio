@@ -4,7 +4,7 @@ import ProjectFilter from '../../components/vue/ProjectFilter.vue';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
-projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+projects.sort((a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf());
 ---
 
 <Layout title="Projects | Daniele Compagnoni" description="Engineering portfolio and highly interactive hub for technical output.">

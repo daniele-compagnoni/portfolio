@@ -7,9 +7,15 @@ const { frontmatter } = Astro.props;
 <Layout title={`${frontmatter.title} | Project`} description={frontmatter.summary}>
   <article class="max-w-[75ch] mx-auto">
     <header class="mb-12">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-xs font-mono px-2 py-1 bg-bg-muted border border-border-subtle rounded-md text-text-secondary">{frontmatter.context}</span>
-        <time class="text-sm font-mono text-text-muted">{new Date(frontmatter.date).toLocaleDateString()}</time>
+      <div class="flex items-center gap-4 mb-12">
+        <time class="text-sm font-mono text-text-muted">
+          {new Date(frontmatter.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+          - 
+          {frontmatter.endDate ? new Date(frontmatter.endDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Ongoing'}
+        </time>
+        <span class="text-sm font-mono text-action-primary px-3 py-1 bg-action-primary/10 rounded-full border border-action-primary/20">
+          {frontmatter.context}
+        </span>
       </div>
       <h1 class="text-4xl font-semibold tracking-tight text-text-primary mb-4">{frontmatter.title}</h1>
       <p class="text-lg text-text-secondary font-serif leading-relaxed mb-6">{frontmatter.summary}</p>
@@ -21,7 +27,7 @@ const { frontmatter } = Astro.props;
       )}
     </header>
     
-    <div class="prose prose-zinc dark:prose-invert max-w-none prose-p:font-serif prose-p:leading-relaxed prose-headings:font-sans">
+    <div class="prose dark:prose-invert max-w-none prose-p:font-serif prose-p:leading-relaxed prose-headings:font-sans">
       <slot />
     </div>
   </article>

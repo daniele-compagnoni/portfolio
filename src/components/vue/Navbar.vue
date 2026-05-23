@@ -1,7 +1,11 @@
 <template>
   <header class="fixed top-0 w-full z-50 liquid-glass border-b border-border-subtle/50">
     <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="/" class="font-sans font-semibold text-lg tracking-tight active:scale-95 transition-transform duration-200">DC.</a>
+      <a href="/" class="flex items-center gap-2 active:scale-95 transition-transform duration-200 group">
+        <div class="w-8 h-8 text-text-primary group-hover:text-action-primary transition-colors">
+          <LionIcon />
+        </div>
+      </a>
       
       <!-- Desktop Nav -->
       <nav class="hidden md:flex gap-6">
@@ -32,32 +36,34 @@
       </div>
     </div>
 
-    <!-- Mobile Curtain -->
-    <transition name="curtain">
-      <div v-if="isMenuOpen" class="fixed inset-0 top-16 bg-bg-base/95 backdrop-blur-md border-t border-border-subtle flex flex-col md:hidden z-40 overflow-y-auto">
-        <nav class="flex flex-col p-6 gap-6">
-          <a 
-            v-for="link in links" 
-            :key="link.href" 
-            :href="link.href" 
-            @click="isMenuOpen = false"
-            class="text-2xl font-semibold text-text-primary hover:text-action-primary transition-colors active:scale-95 duration-200 ease-out"
-          >
-            {{ link.label }}
-          </a>
-          <div class="h-px w-full bg-border-subtle my-4"></div>
-          <a href="/contact" @click="isMenuOpen = false" class="text-xl font-semibold text-text-primary hover:text-action-primary active:scale-95 transition-all">Contact</a>
-          <a href="/CV.pdf" target="_blank" @click="isMenuOpen = false" class="text-xl font-semibold text-action-primary active:scale-95 transition-all">Download CV</a>
-        </nav>
-      </div>
-    </transition>
   </header>
+
+  <!-- Mobile Curtain -->
+  <transition name="curtain">
+    <div v-if="isMenuOpen" class="fixed inset-0 top-16 bg-bg-base/95 backdrop-blur-md border-t border-border-subtle flex flex-col md:hidden z-40 overflow-y-auto">
+      <nav class="flex flex-col p-6 gap-6">
+        <a 
+          v-for="link in links" 
+          :key="link.href" 
+          :href="link.href" 
+          @click="isMenuOpen = false"
+          class="text-2xl font-semibold text-text-primary hover:text-action-primary transition-colors active:scale-95 duration-200 ease-out"
+        >
+          {{ link.label }}
+        </a>
+        <div class="h-px w-full bg-border-subtle my-4"></div>
+        <a href="/contact" @click="isMenuOpen = false" class="text-xl font-semibold text-text-primary hover:text-action-primary active:scale-95 transition-all">Contact</a>
+        <a href="/CV.pdf" target="_blank" @click="isMenuOpen = false" class="text-xl font-semibold text-action-primary active:scale-95 transition-all">Download CV</a>
+      </nav>
+    </div>
+  </transition>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { Menu, X } from 'lucide-vue-next';
 import ThemeToggle from './ThemeToggle.vue';
+import LionIcon from './LionIcon.vue';
 
 const isMenuOpen = ref(false);
 

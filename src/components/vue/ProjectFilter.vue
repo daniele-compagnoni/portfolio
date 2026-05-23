@@ -5,10 +5,13 @@
         v-model="searchQuery" 
         type="text" 
         placeholder="Search projects..." 
-        class="flex-grow px-4 py-2 bg-transparent border border-border-subtle rounded-[6px] text-text-primary transition-all duration-200 ease-out focus:outline-none focus:border-action-primary focus:ring-2 focus:ring-action-primary/50 active:scale-[0.99]"
+        class="flex-grow px-4 py-2 bg-bg-base border border-border-subtle rounded-[6px] text-text-primary placeholder:text-text-muted transition-all duration-200 ease-out focus:outline-none focus:border-action-primary focus:ring-2 focus:ring-action-primary/50 active:scale-[0.99]"
       />
       
-      <select v-model="selectedContext" class="px-4 py-2 bg-transparent border border-border-subtle rounded-[6px] text-text-primary transition-all duration-200 ease-out focus:outline-none focus:border-action-primary focus:ring-2 focus:ring-action-primary/50 active:scale-[0.99]">
+      <select 
+        v-model="selectedContext" 
+        class="px-4 py-2 border border-border-subtle rounded-[6px] text-text-primary transition-all duration-200 ease-out focus:outline-none focus:border-action-primary focus:ring-2 focus:ring-action-primary/50 active:scale-[0.99] select-themed"
+      >
         <option value="All">All Contexts</option>
         <option value="Academic">Academic</option>
         <option value="Independent">Independent</option>
@@ -48,6 +51,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 
+import Fuse from 'fuse.js';
+
 const props = defineProps({
   projects: {
     type: Array,
@@ -58,13 +63,32 @@ const props = defineProps({
 const searchQuery = ref('');
 const selectedContext = ref('All');
 
+// Initialize Fuse instance
+const fuse = new Fuse(props.projects, {
+  keys: [
+    { name: 'data.title', weight: 2.0 },
+    { name: 'data.skills.id', weight: 1.5 },
+    { name: 'data.tags', weight: 1.2 },
+    { name: 'data.summary', weight: 0.8 }
+  ],
+  threshold: 0.3,
+  ignoreLocation: true
+});
+
 const filteredProjects = computed(() => {
-  return props.projects.filter(p => {
-    const matchesSearch = p.data.title.toLowerCase().includes(searchQuery.value.toLowerCase()) || 
-                          p.data.summary.toLowerCase().includes(searchQuery.value.toLowerCase());
-    const matchesContext = selectedContext.value === 'All' || p.data.context === selectedContext.value;
-    return matchesSearch && matchesContext;
-  });
+  let result = props.projects;
+  
+  // Apply Search
+  if (searchQuery.value.trim() !== '') {
+    result = fuse.search(searchQuery.value).map(r => r.item);
+  }
+  
+  // Apply Context Filter
+  if (selectedContext.value !== 'All') {
+    result = result.filter(p => p.data.context === selectedContext.value);
+  }
+  
+  return result;
 });
 </script>
 
@@ -82,5 +106,17 @@ const filteredProjects = computed(() => {
 .project-list-leave-active {
   position: absolute;
   width: 100%;
+}
+
+/* Native select inherits the page's current colour-scheme, but we set
+   background and colour explicitly so the dropdown chrome is never stuck
+   in light-mode when dark mode is active. */
+.select-themed {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+}
+.select-themed option {
+  background-color: var(--color-bg-elevated);
+  color: var(--color-text-primary);
 }
 </style>

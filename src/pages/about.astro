@@ -13,7 +13,7 @@ education.sort((a, b) => b.data.endDate.valueOf() - a.data.endDate.valueOf());
     <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-text-primary mb-12">About</h1>
     
     <!-- Narrative Bio -->
-    <section class="prose prose-zinc dark:prose-invert max-w-none prose-p:font-serif prose-p:leading-relaxed prose-headings:font-sans mb-20">
+    <section class="prose dark:prose-invert max-w-none prose-p:font-serif prose-p:leading-relaxed prose-headings:font-sans mb-20">
       <p>
         I am a software engineer driven by a philosophy of efficiency, robust fundamentals, and architectural clarity. I believe that modern development too often relies on bloated frameworks to solve problems that are better addressed through a deep understanding of computer science principles and system design.
       </p>
@@ -67,6 +67,56 @@ education.sort((a, b) => b.data.endDate.valueOf() - a.data.endDate.valueOf());
             )}
           </Card>
         ))}
+      </div>
+    </section>
+
+    <!-- Spoken Languages -->
+    <section class="mt-20">
+      <h2 class="text-2xl font-semibold tracking-tight text-text-primary mb-8 border-b border-border-subtle pb-4">Languages</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <Card class="p-6 flex flex-col justify-between">
+          <div class="mb-4">
+            <h3 class="text-lg font-semibold text-text-primary">Italian</h3>
+            <span class="text-xs font-mono text-text-muted uppercase tracking-wider">Native Speaker</span>
+          </div>
+          <div class="flex gap-1.5">
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+          </div>
+        </Card>
+
+        <Card class="p-6 flex flex-col justify-between">
+          <div class="mb-4">
+            <h3 class="text-lg font-semibold text-text-primary">English</h3>
+            <span class="text-xs font-mono text-text-muted uppercase tracking-wider">Full Professional</span>
+          </div>
+          <div class="flex gap-1.5">
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-transparent border border-border-strong"></div>
+          </div>
+        </Card>
+
+        <Card class="p-6 flex flex-col justify-between">
+          <div class="mb-4">
+            <h3 class="text-lg font-semibold text-text-primary">French</h3>
+            <span class="text-xs font-mono text-text-muted uppercase tracking-wider">Basic Knowledge</span>
+          </div>
+          <div class="flex gap-1.5">
+            <div class="w-2.5 h-2.5 rounded-full" style="background-color:var(--color-action-primary);border:1px solid var(--color-action-primary)"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-transparent border border-border-strong"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-transparent border border-border-strong"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-transparent border border-border-strong"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-transparent border border-border-strong"></div>
+          </div>
+        </Card>
+        
       </div>
     </section>
   </div>

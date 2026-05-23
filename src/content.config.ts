@@ -27,10 +27,12 @@ const projects = defineCollection({
     z.object({
       title: z.string(),
       summary: z.string().max(150, "Abstract must fit within a standard card UI."),
-      date: z.date(),
+      startDate: z.date(),
+      endDate: z.date().optional(),
       context: z.enum(["Academic", "Independent", "Professional"]),
       // Astro's reference API strictly binds this array to valid IDs in the skills collection
       skills: z.array(reference("skills")),
+      tags: z.array(z.string()).optional(),
       links: z
         .object({
           repository: z.string().url().optional(),

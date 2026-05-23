@@ -20,12 +20,14 @@ const { title, description } = Astro.props;
     <script is:inline>
       if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
+        document.documentElement.style.colorScheme = 'dark';
       } else {
         document.documentElement.classList.remove('dark');
+        document.documentElement.style.colorScheme = 'light';
       }
     </script>
   </head>
-  <body class="antialiased selection:bg-action-primary selection:text-white pt-16 flex flex-col min-h-screen">
+  <body class="antialiased pt-16 flex flex-col min-h-screen">
     <Navbar client:load />
     <main class="flex-grow max-w-[1200px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-12">
       <slot />
