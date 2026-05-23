@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import MarkdownPostLayout from '@/layouts/MarkdownPostLayout.astro';
 
 export async function getStaticPaths() {
@@ -15,5 +16,12 @@ const { Content } = await render(thought);
 ---
 
 <MarkdownPostLayout frontmatter={thought.data}>
+  {thought.data.thumbnail && (
+    <Image 
+      src={thought.data.thumbnail} 
+      alt={thought.data.title} 
+      class="w-full h-auto object-cover rounded-lg border border-slate-200 dark:border-slate-800 mb-8"
+    />
+  )}
   <Content />
 </MarkdownPostLayout>
